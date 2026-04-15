@@ -1,0 +1,21 @@
+services:
+  backend:
+    build: ./EAD_BE_CA2
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mongodb
+    environment:
+      - SPRING_DATA_MONGODB_URI=mongodb://mongodb:27017/recipes
+
+  frontend:
+    build: ./EAD_FE_CA2
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+
+  mongodb:
+    image: mongo:6
+    ports:
+      - "27017:27017"

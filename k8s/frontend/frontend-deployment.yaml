@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: frontend
-        image: seshukalakurthi/eadca2_frontend:1.0
+        image: seshukalakurthi/eadca2_frontend:latest
         ports:
         - containerPort: 3000
         env:

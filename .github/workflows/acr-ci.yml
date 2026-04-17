@@ -1,0 +1,36 @@
+name: ACR CI
+# Pushing Images to Azure Contanier Registry
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Azure Login (client secret)
+        uses: azure/login@v2
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      # Backend
+      - name: Build Backend Image
+        run: |
+          docker build -t eadeployca2.azurecr.io/eadca2_backend:latest ./EAD_BE_CA2
+
+      # Frontend
+      - name: Build Frontend Image
+        run: |
+          docker build -t eadeployca2.azurecr.io/eadca2_frontend:latest ./EAD_FE_CA2
+
+      - name: Push Backend Image
+        run: |
+          docker push eadeployca2.azurecr.io/eadca2_backend:latest
+
+      - name: Push Frontend Image
+        run: |
+          docker push eadeployca2.azurecr.io/eadca2_frontend:latest

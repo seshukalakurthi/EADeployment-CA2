@@ -1,4 +1,4 @@
-name: CI Pipeline
+name: Docker Hub CI
 # Pushing Images to Docker Hub
 
 on:

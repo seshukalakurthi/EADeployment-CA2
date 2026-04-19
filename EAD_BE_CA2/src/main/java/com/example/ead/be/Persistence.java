@@ -47,7 +47,6 @@ public class Persistence {
   public Persistence()
   {
     // User/Password should NOT be embedded in the code. I just do it for simplicity while taking care to give this user the least privilege to avoid security issues!
-    initMongoDBClient("mongodb+srv://ead2024:ead2024.@ead-2023-24.lpclwdo.mongodb.net/", "ead_ca2", "ead_2024");
   }
 
   public Persistence(String connString, String dbName, String colName)

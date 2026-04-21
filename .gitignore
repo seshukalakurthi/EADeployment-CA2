@@ -1,0 +1,5 @@
+terraform/.terraform.lock.hcl
+terraform/terraform.tfstate
+terraform/terraform.tfstate.backup
+terraform/.terraform/providers/registry.terraform.io/hashicorp/azurerm/4.69.0/windows_amd64/LICENSE.txt
+terraform/.terraform/providers/registry.terraform.io/hashicorp/azurerm/4.69.0/windows_amd64/terraform-provider-azurerm_v4.69.0_x5.exe

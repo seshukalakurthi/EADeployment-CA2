@@ -1,5 +1,5 @@
 variable "resource_group_name" {
-  default = "eadeploy-ca2-prod-rg"
+  default = "eadeploy-ca2-rg1"
 }
 
 variable "location" {
@@ -7,11 +7,11 @@ variable "location" {
 }
 
 variable "acr_name" {
-  default = "eadeployca2prodregistry"
+  default = "eadeployca2registry1"
 }
 
 variable "aks_name" {
-  default = "eadeploy-ca2-prod-cluster"
+  default = "eadeploy-ca2-cluster1"
 }
 
 variable "node_count" {

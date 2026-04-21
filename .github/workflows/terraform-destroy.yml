@@ -1,10 +1,10 @@
-name: Terraform Infra
+name: Terraform Destroy
 
 on:
-  workflow_dispatch:
+  workflow_dispatch: 
 
 jobs:
-  terraform:
+  destroy:
     runs-on: ubuntu-latest
 
     defaults:
@@ -24,13 +24,10 @@ jobs:
         uses: hashicorp/setup-terraform@v3
 
       - name: Terraform Init
-        run: terraform init
+        run: terraform init -reconfigure
 
       - name: Terraform Validate
         run: terraform validate
-
-      - name: Terraform Plan
-        run: terraform plan
-
-      - name: Terraform Apply
-        run: terraform apply -auto-approve
+        
+      - name: Terraform Destroy
+        run: terraform destroy -auto-approve

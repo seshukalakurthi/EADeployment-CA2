@@ -61,6 +61,10 @@ jobs:
             --name ${{ secrets.AKS_CLUSTER }} \
             --overwrite-existing
 
+      - name: Create Namespace
+        run: |
+          kubectl create namespace ead-ca2 --dry-run=client -o yaml | kubectl apply -f -
+
       - name: Create MongoDB Secret in AKS
         run: |
           kubectl create secret generic mongodb-secret \
@@ -71,9 +75,9 @@ jobs:
 
       - name: Deploy to AKS
         run: |
-          kubectl apply -f k8s/backend/
-          kubectl apply -f k8s/frontend/
-          kubectl apply -f k8s/mongodb/
+          kubectl apply -f k8s/mongodb/ -n ead-ca2
+          kubectl apply -f k8s/backend/ -n ead-ca2
+          kubectl apply -f k8s/frontend/ -n ead-ca2
 
       - name: Verify Deployment
         run: |

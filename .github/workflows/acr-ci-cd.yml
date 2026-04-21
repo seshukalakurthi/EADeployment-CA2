@@ -71,6 +71,7 @@ jobs:
           --from-literal=MONGO_URI="${{ secrets.MONGO_URI }}" \
           --from-literal=username=eac2024 \
           --from-literal=password=eac2024 \
+          -n ead-ca2 \
           --dry-run=client -o yaml | kubectl apply -f -
 
       - name: Deploy to AKS

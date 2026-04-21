@@ -21,11 +21,3 @@ variable "node_count" {
 variable "vm_size" {
   default = "Standard_B2s_v2"
 }
-
-variable "subscription_id" {
-  type = string
-}
-
-variable "tenant_id" {
-  type = string
-}

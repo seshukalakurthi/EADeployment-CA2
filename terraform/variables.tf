@@ -1,5 +1,5 @@
 variable "resource_group_name" {
-  default = "eadeploy-ca2-rg2"
+  default = "eadeploy-ca2-receipe-rg"
 }
 
 variable "location" {
@@ -7,11 +7,11 @@ variable "location" {
 }
 
 variable "acr_name" {
-  default = "eadeployca2registry2"
+  default = "eadeployca2receiperegistry"
 }
 
 variable "aks_name" {
-  default = "eadeploy-ca2-cluster2"
+  default = "eadeploy-ca2-receipe-cluster"
 }
 
 variable "node_count" {

@@ -18,7 +18,7 @@ jobs:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
 
       - name: Login to ACR
-        run: az acr login --name eadeployca2registry
+        run: az acr login --name eadeployca2receiperegistry
 
       - name: Check Azure Account
         run: az account show
@@ -26,20 +26,20 @@ jobs:
       # Backend
       - name: Build Backend Image
         run: |
-          docker build -t eadeployca2registry.azurecr.io/eadca2_backend:latest ./EAD_BE_CA2
+          docker build -t eadeployca2receiperegistry.azurecr.io/eadca2_backend:latest ./EAD_BE_CA2
 
       # Frontend
       - name: Build Frontend Image
         run: |
-          docker build -t eadeployca2registry.azurecr.io/eadca2_frontend:latest ./EAD_FE_CA2
+          docker build -t eadeployca2receiperegistry.azurecr.io/eadca2_frontend:latest ./EAD_FE_CA2
 
       - name: Push Backend Image
         run: |
-          docker push eadeployca2registry.azurecr.io/eadca2_backend:latest
+          docker push eadeployca2receiperegistry.azurecr.io/eadca2_backend:latest
 
       - name: Push Frontend Image
         run: |
-          docker push eadeployca2registry.azurecr.io/eadca2_frontend:latest
+          docker push eadeployca2receiperegistry.azurecr.io/eadca2_frontend:latest
 
   deploy:
     runs-on: ubuntu-latest
@@ -60,6 +60,14 @@ jobs:
             --resource-group ${{ secrets.RESOURCE_GROUP}} \
             --name ${{ secrets.AKS_CLUSTER }} \
             --overwrite-existing
+
+      - name: Create MongoDB Secret in AKS
+        run: |
+          kubectl create secret generic mongodb-secret \
+          --from-literal=MONGO_URI="${{ secrets.MONGO_URI }}" \
+          --from-literal=username=eac2024 \
+          --from-literal=password=eac2024 \
+          --dry-run=client -o yaml | kubectl apply -f -
 
       - name: Deploy to AKS
         run: |

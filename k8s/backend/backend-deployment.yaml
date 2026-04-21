@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: backend
-        image: eadeployca2registry.azurecr.io/eadca2_backend:latest
+        image: eadeployca2receiperegistry.azurecr.io/eadca2_backend:latest
         imagePullPolicy: Always
         ports:
         - containerPort: 8080

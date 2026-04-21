@@ -65,15 +65,6 @@ jobs:
         run: |
           kubectl create namespace ead-ca2 --dry-run=client -o yaml | kubectl apply -f -
 
-      - name: Create MongoDB Secret in AKS
-        run: |
-          kubectl create secret generic mongodb-secret \
-          --from-literal=MONGO_URI="${{ secrets.MONGO_URI }}" \
-          --from-literal=username=ead2024 \
-          --from-literal=password=ead2024 \
-          -n ead-ca2 \
-          --dry-run=client -o yaml | kubectl apply -f -
-
       - name: Deploy to AKS
         run: |
           kubectl apply -f k8s/mongodb/ -n ead-ca2

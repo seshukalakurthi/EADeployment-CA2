@@ -1,0 +1,23 @@
+variable "resource_group_name" {
+  default = "eadeploy-ca2-prod-rg"
+}
+
+variable "location" {
+  default = "southeastasia"
+}
+
+variable "acr_name" {
+  default = "eadeployca2prodregistry"
+}
+
+variable "aks_name" {
+  default = "eadeploy-ca2-prod-cluster"
+}
+
+variable "node_count" {
+  default = 1
+}
+
+variable "vm_size" {
+  default = "Standard_B2s_v2"
+}

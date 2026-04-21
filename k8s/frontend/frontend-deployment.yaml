@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: frontend
-        image: eadeployca2registry.azurecr.io/eadca2_frontend:latest
+        image: eadeployca2receiperegistry.azurecr.io/eadca2_frontend:latest
         imagePullPolicy: Always
         ports:
         - containerPort: 3000

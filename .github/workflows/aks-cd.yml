@@ -40,13 +40,22 @@ jobs:
 
       - name: Create Namespace
         run: |
-          kubectl create namespace ead-ca2 --dry-run=client -o yaml | kubectl apply -f -
+          kubectl create namespace eadeploy-ca2 --dry-run=client -o yaml | kubectl apply -f -
 
-      - name: Deploy to AKS
-        run: |
-          kubectl apply -f k8s/mongodb/ -n ead-ca2
-          kubectl apply -f k8s/backend/ -n ead-ca2
-          kubectl apply -f k8s/frontend/ -n ead-ca2
+      - name: Deploy MongoDB
+        run: kubectl apply -f k8s/mongodb/ -n eadeploy-ca2
+
+      - name: Wait for MongoDB
+        run: kubectl rollout status deployment/mongodb -n eadeploy-ca2
+
+      - name: Deploy Backend
+        run: kubectl apply -f k8s/backend/ -n eadeploy-ca2
+
+      - name: Wait for Backend
+        run: kubectl rollout status deployment/backend -n eadeploy-ca2
+
+      - name: Deploy Frontend
+        run: kubectl apply -f k8s/frontend/ -n eadeploy-ca2
 
       - name: Verify
-        run: kubectl get all -n ead-ca2
+        run: kubectl get all -n eadeploy-ca2

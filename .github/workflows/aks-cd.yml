@@ -59,13 +59,19 @@ jobs:
         run: kubectl rollout status deployment/mongodb -n eadeploy-ca2
 
       - name: Deploy Backend
-        run: kubectl apply -f k8s/backend/ -n eadeploy-ca2
+        run:  |
+            kubectl set image deployment/backend \
+            backend=eadeployca2receiperegistry.azurecr.io/eadca2_backend:${IMAGE_TAG} \
+            -n eadeploy-ca2
 
       - name: Wait for Backend
         run: kubectl rollout status deployment/backend -n eadeploy-ca2
 
       - name: Deploy Frontend
-        run: kubectl apply -f k8s/frontend/ -n eadeploy-ca2
+        run: |
+            kubectl set image deployment/frontend \
+            frontend=eadeployca2receiperegistry.azurecr.io/eadca2_frontend:${IMAGE_TAG} \
+            -n eadeploy-ca2
 
       - name: Verify
         run: kubectl get all -n eadeploy-ca2

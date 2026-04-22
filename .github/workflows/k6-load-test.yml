@@ -25,7 +25,7 @@ jobs:
         env:
           BASE_URL: ${{ vars.BASE_URL }}
         run: |
-          k6 run perf-tests-k6/bp-bmi-loadtest.js | tee k6report.txt
+          k6 run k6-load-test/k6-load-test.js | tee k6report.txt
 
       - name: Upload k6 Report
         uses: actions/upload-artifact@v4

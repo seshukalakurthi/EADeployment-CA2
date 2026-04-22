@@ -1,4 +1,4 @@
-name: Staging CD with k6 & zap Test
+name: k6 load test
 
 on:
    workflow_dispatch:

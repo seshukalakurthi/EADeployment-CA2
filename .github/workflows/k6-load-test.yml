@@ -23,4 +23,4 @@ jobs:
 
     - name: Run k6 test
       run: |
-        k6 run k6-test.js
+        k6 run k6-load-test/k6-load-test.js

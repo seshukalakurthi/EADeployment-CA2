@@ -31,7 +31,7 @@ jobs:
       # Frontend
       - name: Build Frontend Image
         run: |
-          docker build -t eadeployca2receiperegistry.azurecr.io/eadca2_frontend:latest ./EAD_FE_CA2
+          docker build -t eadeployca2receiperegistry.azurecr.io/eadca2_frontend:v1 ./EAD_FE_CA2
 
       - name: Push Backend Image
         run: |
@@ -39,4 +39,4 @@ jobs:
 
       - name: Push Frontend Image
         run: |
-          docker push eadeployca2receiperegistry.azurecr.io/eadca2_frontend:latest
+          docker push eadeployca2receiperegistry.azurecr.io/eadca2_frontend:v1

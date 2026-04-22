@@ -50,13 +50,13 @@ jobs:
       - name: Scan Backend Image
         run: |
           trivy image --exit-code 1 --severity HIGH,CRITICAL \
-          eadeployca2recipeiregistry.azurecr.io/eadca2_backend:${IMAGE_TAG}
+          eadeployca2receiperegistry.azurecr.io/eadca2_backend:${IMAGE_TAG}
 
       # Scan Frontend Image
       - name: Scan Frontend Image
         run: |
           trivy image --exit-code 1 --severity HIGH,CRITICAL \
-          eadeployca2recipeiregistry.azurecr.io/eadca2_frontend:${IMAGE_TAG}
+          eadeployca2receiperegistry.azurecr.io/eadca2_frontend:${IMAGE_TAG}
 
       - name: Push Backend Image
         run: |

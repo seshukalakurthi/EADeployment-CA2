@@ -8,7 +8,9 @@ jobs:
   load-test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      
+      - name: Checkout Code
+        uses: actions/checkout@v4
       
       # Install k6
       - name: Install k6

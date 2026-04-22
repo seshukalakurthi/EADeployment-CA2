@@ -3,24 +3,48 @@ kind: Deployment
 metadata:
   name: backend
 spec:
-  replicas: 1
+  replicas: 2
+
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
+
   selector:
     matchLabels:
       app: backend
+
   template:
     metadata:
       labels:
         app: backend
+
     spec:
       containers:
-      - name: backend
-        image: eadeployca2receiperegistry.azurecr.io/eadca2_backend:latest
-        imagePullPolicy: Always
-        ports:
-        - containerPort: 8080
-        env:
-        - name: SPRING_DATA_MONGODB_URI
-          valueFrom:
-            secretKeyRef:
-              name: mongodb-secret
-              key: MONGO_URI
+        - name: backend
+          image: eadeployca2receiperegistry.azurecr.io/eadca2_backend:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+
+          env:
+            - name: SPRING_DATA_MONGODB_URI
+              valueFrom:
+                secretKeyRef:
+                  name: mongodb-secret
+                  key: MONGO_URI
+
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 8080
+            initialDelaySeconds: 30
+            periodSeconds: 10
+
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 8080
+            initialDelaySeconds: 20
+            periodSeconds: 5

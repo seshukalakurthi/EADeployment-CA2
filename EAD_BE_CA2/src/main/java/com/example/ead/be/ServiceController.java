@@ -1,13 +1,20 @@
 package com.example.ead.be;
 
-import jakarta.annotation.PostConstruct;
+import java.util.Arrays;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Arrays;
-import java.util.List;
+import jakarta.annotation.PostConstruct;
 
 @RestController
 public class ServiceController {
@@ -37,9 +44,14 @@ public class ServiceController {
 	@GetMapping("/")
 	public String index() {
 		p.main2();
-		return "Greetings from EAD CA2 Template project 2023-24!";
+		return "Greetings from EAD CA2 Template project 2025-26!";
 	}
 
+
+	@GetMapping("/health")
+    public String health() {
+        return "UP";
+}
 	@GetMapping("/recipes")
 	public List<Recipe> getAllRecipes()
 	{

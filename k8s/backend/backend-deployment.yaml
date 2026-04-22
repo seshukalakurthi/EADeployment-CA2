@@ -21,6 +21,19 @@ spec:
       - name: backend
         image: eadeployca2receiperegistry.azurecr.io/eadca2_backend:latest
         imagePullPolicy: Always
+        livenessProbe:
+          httpGet:
+            path: /actuator/health
+            port: 8080
+          initialDelaySeconds: 30
+          periodSeconds: 10
+
+        readinessProbe:
+          httpGet:
+            path: /actuator/health
+            port: 8080
+        initialDelaySeconds: 10
+        periodSeconds: 5
         ports:
         - containerPort: 8080
         env:

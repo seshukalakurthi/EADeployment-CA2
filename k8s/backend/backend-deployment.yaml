@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
       - name: backend
-        image: eadeployca2receiperegistry.azurecr.io/eadca2_backend:latest
+        image: eadeployca2receiperegistry.azurecr.io/eadca2_backend:13
         imagePullPolicy: Always
         livenessProbe:
           httpGet:
@@ -44,6 +44,6 @@ spec:
               key: MONGO_URI
         resources:
           requests:
-            cpu: "200m"
+            cpu: "100m"
           limits:
-            cpu: "500m"
+            cpu: "250m"

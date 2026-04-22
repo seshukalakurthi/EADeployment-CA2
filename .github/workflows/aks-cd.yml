@@ -1,0 +1,61 @@
+name: AKS CD
+# Deploying Pods to AKS
+
+on:
+  workflow_run:
+    workflows: ["ACR CI"]
+    types:
+      - completed
+
+  workflow_dispatch:
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  deploy:
+    if: >
+      (github.event_name == 'workflow_run' && github.event.workflow_run.conclusion == 'success') || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+
+    environment:
+      name: production
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Azure Login
+        uses: azure/login@v2
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Get AKS Credentials
+        run: |
+          az aks get-credentials \
+            --resource-group ${{ secrets.RESOURCE_GROUP }} \
+            --name ${{ secrets.AKS_CLUSTER }} \
+            --overwrite-existing
+
+      - name: Create Namespace
+        run: |
+          kubectl create namespace eadeploy-ca2 --dry-run=client -o yaml | kubectl apply -f -
+
+      - name: Deploy MongoDB
+        run: kubectl apply -f k8s/mongodb/ -n eadeploy-ca2
+
+      - name: Wait for MongoDB
+        run: kubectl rollout status deployment/mongodb -n eadeploy-ca2
+
+      - name: Deploy Backend
+        run: kubectl apply -f k8s/backend/ -n eadeploy-ca2
+
+      - name: Wait for Backend
+        run: kubectl rollout status deployment/backend -n eadeploy-ca2
+
+      - name: Deploy Frontend
+        run: kubectl apply -f k8s/frontend/ -n eadeploy-ca2
+
+      - name: Verify
+        run: kubectl get all -n eadeploy-ca2

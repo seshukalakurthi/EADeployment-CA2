@@ -15,6 +15,12 @@ jobs:
       - name: Set image tag
         run: echo "IMAGE_TAG=${{ github.run_number }}" >> $GITHUB_ENV
 
+      - name: Upload tag artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: image-tag
+          path: image_tag.txt
+
       - name: Azure Login
         uses: azure/login@v2
         with:

@@ -26,6 +26,16 @@ jobs:
       - name: Check Azure Account
         run: az account show
 
+      # Install Trivy
+      - name: Install Trivy
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y wget apt-transport-https gnupg lsb-release
+          wget -qO - https://aquasecurity.github.io/trivy-repo/deb/public.key | sudo apt-key add -
+          echo deb https://aquasecurity.github.io/trivy-repo/deb $(lsb_release -sc) main | sudo tee /etc/apt/sources.list.d/trivy.list
+          sudo apt-get update
+          sudo apt-get install -y trivy
+
       # Backend
       - name: Build Backend Image
         run: |
@@ -35,6 +45,18 @@ jobs:
       - name: Build Frontend Image
         run: |
           docker build -t eadeployca2receiperegistry.azurecr.io/eadca2_frontend:${IMAGE_TAG} ./EAD_FE_CA2
+
+      # Scan Backend Image
+      - name: Scan Backend Image
+        run: |
+          trivy image --exit-code 1 --severity HIGH,CRITICAL \
+          eadeployca2recipeiregistry.azurecr.io/eadca2_backend:${IMAGE_TAG}
+
+      # Scan Frontend Image
+      - name: Scan Frontend Image
+        run: |
+          trivy image --exit-code 1 --severity HIGH,CRITICAL \
+          eadeployca2recipeiregistry.azurecr.io/eadca2_frontend:${IMAGE_TAG}
 
       - name: Push Backend Image
         run: |

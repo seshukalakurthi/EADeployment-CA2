@@ -39,6 +39,10 @@ http.createServer(function (req, res) {
 		 res.end();
 		 console.log('favicon requested');
     }
+	else if (req.url === '/health') {
+    res.writeHead(200, { 'Content-Type': 'text/plain' });
+    res.end('OK');
+	}
 	else
 	{
 		res.writeHead(200, {'Content-Type': 'text/html'});

@@ -5,7 +5,6 @@
 ![AKS](https://img.shields.io/badge/Kubernetes-AKS-blue)
 ![CI/CD](https://img.shields.io/badge/CI/CD-GitHub%20Actions-green)
 ![IaC](https://img.shields.io/badge/IaC-Terraform-purple)
-![Monitoring](https://img.shields.io/badge/Monitoring-Prometheus%20%7C%20Grafana-orange)
 
 ## Overview
 This project demonstrates the implementation of a cloud-native microservices application using DevOps practices. The system is deployed on Azure Kubernetes Service (AKS) with automated CI/CD pipelines, infrastructure provisioning using Terraform, and integrated monitoring and scaling mechanisms.
@@ -51,6 +50,8 @@ terraform/
 
 k6-load-test/
 └── # k6 load test script
+
+---
 
 ## CI/CD Pipeline
 A GitHub Actions-based pipeline automates the build, validation, and deployment of the application.

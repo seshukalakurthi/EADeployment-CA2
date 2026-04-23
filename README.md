@@ -31,25 +31,28 @@ User requests are initiated through a web browser and routed via the NGINX Ingre
 ## Repository Structure
 The repository is organised to separate application code, infrastructure, and deployment configurations for better maintainability.
 
-EAD_BE_CA2/
-└── # Backend Logic
-
-EAD_FE_CA2/
-└── # Frontend Logic
-
-k8s/
-├── backend/ # Backend deployment and service manifests
-├── frontend/ # Frontend deployment and ingress configs
-├── mongodb/ # Database deployment and storage configs
-
-.github/workflows/
-└── # CI/CD pipeline definition
-
-terraform/
-└── # Infrastructure provisioning scripts
-
-k6-load-test/
-└── # k6 load test script
+EADeployment-CA2/
+│
+├── EAD_BE_CA2/                 # Backend application (Java)
+│
+├── EAD_FE_CA2/                 # Frontend application (Node.js)
+│
+├── k8s/                        # Kubernetes manifests
+│   ├── backend/                # Backend deployment & service
+│   ├── frontend/               # Frontend deployment & ingress
+│   └── mongodb/                # MongoDB deployment, PVC, secrets
+│
+├── .github/
+│   └── workflows/              # CI/CD pipelines
+│      
+│
+├── terraform/                  # Infrastructure as Code (AKS setup)
+│   
+│
+├── k6-load-test/               # Load testing scripts
+│  
+│
+└── README.md                  # Project documentation
 
 ---
 

@@ -52,8 +52,11 @@ jobs:
         run: |
           kubectl create namespace eadeploy-ca2 --dry-run=client -o yaml | kubectl apply -f -
 
-      - name: Deploy MongoDB
-        run: kubectl apply -f k8s/mongodb/ -n eadeploy-ca2
+      - name: Apply Kubernetes Manifests
+        run: |
+          kubectl apply -f k8s/mongodb/ -n eadeploy-ca2
+          kubectl apply -f k8s/backend/ -n eadeploy-ca2
+          kubectl apply -f k8s/frontend/ -n eadeploy-ca2
 
       - name: Wait for MongoDB
         run: kubectl rollout status deployment/mongodb -n eadeploy-ca2
@@ -72,6 +75,11 @@ jobs:
             kubectl set image deployment/frontend \
             frontend=eadeployca2receiperegistry.azurecr.io/eadca2_frontend:${IMAGE_TAG} \
             -n eadeploy-ca2
+      - name: Wait for Frontend
+        run: kubectl rollout status deployment/frontend -n eadeploy-ca2
 
       - name: Verify
-        run: kubectl get all -n eadeploy-ca2
+        run: |
+          kubectl get pods -n eadeploy-ca2
+          kubectl get svc -n eadeploy-ca2
+          kubectl get ingress -n eadeploy-ca2

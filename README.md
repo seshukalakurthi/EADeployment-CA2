@@ -31,3 +31,38 @@ User requests are initiated through a web browser and routed via the NGINX Ingre
 
 ## Repository Structure
 The repository is organised to separate application code, infrastructure, and deployment configurations for better maintainability.
+
+EAD_BE_CA2/
+└── # Backend Logic
+
+EAD_FE_CA2/
+└── # Frontend Logic
+
+k8s/
+├── backend/ # Backend deployment and service manifests
+├── frontend/ # Frontend deployment and ingress configs
+├── mongodb/ # Database deployment and storage configs
+
+.github/workflows/
+└── # CI/CD pipeline definition
+
+terraform/
+└── # Infrastructure provisioning scripts
+
+k6-load-test/
+└── # k6 load test script
+
+## CI/CD Pipeline
+A GitHub Actions-based pipeline automates the build, validation, and deployment of the application.
+
+### Continuous Integration (CI)
+The CI pipeline is triggered on code commits. It builds Docker images, performs vulnerability scanning using Trivy, and pushes validated images to Azure Container Registry (ACR).
+
+### Continuous Delivery (CD)
+The CD pipeline deploys the application to AKS by applying Kubernetes manifests and updating container images. Rolling updates ensure zero downtime during deployment.
+
+---
+
+## Deployment Strategy
+A rolling update strategy is used to gradually replace old pods with new ones. This ensures that the application remains available during deployments while reducing risk.
+

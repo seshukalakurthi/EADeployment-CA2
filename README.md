@@ -55,8 +55,7 @@ EADeployment-CA2/
 │
 └── README.md                  # Project documentation
 
-'''
----
+'''---
 
 ## CI/CD Pipeline
 A GitHub Actions-based pipeline automates the build, validation, and deployment of the application.

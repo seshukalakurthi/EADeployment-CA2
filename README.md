@@ -3,7 +3,7 @@
 ## Recipe Tracker Application
 
 ![AKS](https://img.shields.io/badge/Kubernetes-AKS-blue)
-![CI/CD](https://img.shields.io/badge/CI/CD-GitHub%20Actions-lightgrey)
+![CI/CD](https://img.shields.io/badge/CI/CD-GitHub%20Actions-brightgreen)
 ![IaC](https://img.shields.io/badge/IaC-Terraform-purple)
 
 ## Overview
